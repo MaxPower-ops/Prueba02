@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafíos de Geometría UTN-INSPT - Unidad 1</title>
+    <!-- Tailwind CSS para Diseño Responsivo y Estilos Premium -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tone.js para Efectos de Sonido Sintetizados por Software -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <!-- FontAwesome para Iconografía Educativa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuente Inter de Google Fonts para una tipografía ultra limpia -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .grid-bg {
+            background-size: 20px 20px;
+            background-image: linear-gradient(to right, rgba(226, 232, 240, 0.5) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(226, 232, 240, 0.5) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Encabezado Institucional -->
+    <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/10 p-2.5 rounded-xl border border-white/20">
+                    <i class="fa-solid fa-compass-drafting text-2xl text-cyan-400"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest block">Seminario Nivelatorio 2025</span>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">Unidad 1: Geometría Aplicada</h1>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 bg-slate-800/60 border border-slate-700 px-4 py-2 rounded-xl">
+                <span class="text-xs font-semibold text-slate-300">Progreso de la Unidad:</span>
+                <div class="w-24 bg-slate-700 h-2 rounded-full overflow-hidden">
+                    <div id="unit-progress" class="bg-gradient-to-r from-cyan-400 to-blue-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+                <span id="unit-progress-text" class="text-xs font-bold text-cyan-400">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de Navegación de Actividades -->
+    <div class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 flex gap-2 overflow-x-auto">
+            <button onclick="switchTab('tab-pista')" id="btn-tab-pista" class="px-5 py-4 text-sm font-bold border-b-2 border-blue-600 text-blue-600 flex items-center gap-2 transition-all whitespace-nowrap">
+                <i class="fa-solid fa-road text-base"></i>
+                Desafío 1: Pista de Atletismo
+            </button>
+            <button onclick="switchTab('tab-angulos')" id="btn-tab-angulos" class="px-5 py-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 transition-all whitespace-nowrap">
+                <i class="fa-solid fa-circle-notch text-base"></i>
+                Desafío 2: Simulador de Ángulos
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 sm:px-6 lg:px-8">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: CONSTRUCCIÓN DE LA PISTA DE ATLETISMO -->
+        <!-- ========================================== -->
+        <section id="tab-pista" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Columna Izquierda: Instrucciones y Progreso -->
+            <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex items-center gap-2 text-blue-600 mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-extrabold px-2.5 py-1 rounded-full">Construcción</span>
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Pág 2, 7 y 13 del PDF</span>
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-slate-900 leading-tight mb-2">Diseño del Óvalo Deportivo</h2>
+                        <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                            La pista de atletismo se compone acoplando un rectángulo central de <strong>2 m de longitud</strong> por <strong>1 m de ancho</strong> y dos curvas simétricas en sus extremos laterales, trazadas con compás a un radio exacto de <strong>0.5 m</strong>.
+                        </p>
+
+                        <!-- Panel de Pasos de Construcción -->
+                        <div class="space-y-3">
+                            <div id="step-1" class="flex items-start gap-3 p-3.5 bg-blue-50 border border-blue-200 rounded-xl transition-all">
+                                <span class="step-num flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold mt-0.5">1</span>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Paso 1: Vértices de la Cancha</h4>
+                                    <p class="text-xs text-slate-600 mt-0.5">Hace clic sobre las guías parpadeantes del plano para marcar los 4 vértices del rectángulo base: <br><strong>R1(1; 1.5)</strong>, <strong>R2(3; 1.5)</strong>, <strong>R3(3; 2.5)</strong> y <strong>R4(1; 2.5)</strong>.</p>
+                                </div>
+                            </div>
+
+                            <div id="step-2" class="flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-100 rounded-xl transition-all opacity-60">
+                                <span class="step-num flex-shrink-0 w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold mt-0.5">2</span>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Paso 2: Centros de Retorno</h4>
+                                    <p class="text-xs text-slate-600 mt-0.5">Calculá y marcá los puntos medios laterales de los segmentos de salida: <strong>M1(1; 2.0)</strong> en la izquierda y <strong>M2(3; 2.0)</strong> en la derecha.</p>
+                                </div>
+                            </div>
+
+                            <div id="step-3" class="flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-100 rounded-xl transition-all opacity-60">
+                                <span class="step-num flex-shrink-0 w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold mt-0.5">3</span>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wide">Paso 3: Trazado de Arcos (Compás)</h4>
+                                    <p class="text-xs text-slate-600 mt-0.5">Seleccioná los centros marcados y utilizá el compás virtual para barrer las curvas simétricas exteriores de radio <strong>0.5 m</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Reinicio -->
+                    <button onclick="resetDesafioPista()" class="mt-6 w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-arrow-rotate-left"></i>
+                        Reiniciar Construcción
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Plano Cartesiano Interactivo SVG -->
+            <div class="lg:col-span-7 flex flex-col gap-4">
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm flex flex-col items-center justify-center">
+                    <div class="w-full flex items-center justify-between mb-3 text-xs font-bold text-slate-500 uppercase tracking-wider">
+                        <span>Lienzo Cartesiano (Escala: 1 Unidad = 1 Metro)</span>
+                        <span id="coord-hover" class="text-blue-600 font-extrabold">Apuntá al plano...</span>
+                    </div>
+
+                    <!-- Lienzo SVG Interactivo -->
+                    <div class="relative w-full max-w-[480px] aspect-square bg-slate-50 rounded-xl border border-slate-200 overflow-hidden shadow-inner">
+                        <svg id="pista-svg" viewBox="0 0 400 400" class="w-full h-full cursor-crosshair">
+                            <!-- Los elementos dinámicos se renderizan por JavaScript -->
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Contenedor del Mensaje de Éxito de la Pista (Ubicado afuera abajo del lienzo para mantener libre la visual) -->
+                <div id="pista-success-container" class="hidden">
+                    <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center gap-4 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0 text-xl shadow">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div class="flex-grow text-center sm:text-left">
+                            <h3 class="text-emerald-900 font-extrabold text-base">¡Construcción Completada con Éxito!</h3>
+                            <p class="text-xs text-emerald-700 mt-1">
+                                Lograste diagramar el rectángulo base y conectar los arcos laterales de 0.5 m de radio. Podés admirar la geometría final de la pista arriba en el lienzo o avanzar a la siguiente actividad.
+                            </p>
+                        </div>
+                        <button onclick="switchTab('tab-angulos')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl shadow transition-all flex-shrink-0 w-full sm:w-auto">
+                            Siguiente Actividad <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: SIMULADOR DE ÁNGULOS Y BISECTRICES -->
+        <!-- ========================================== -->
+        <section id="tab-angulos" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Columna Izquierda: Controles y Modos -->
+            <div class="lg:col-span-5 flex flex-col gap-4">
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between h-full">
+                    <div>
+                        <!-- Selector de Sub-Actividad de Ángulos -->
+                        <div class="bg-slate-100 p-1 rounded-xl flex gap-1 mb-5">
+                            <button onclick="setAngleSubTab('clasifica')" id="subtab-clasifica" class="flex-1 py-2 text-xs font-extrabold rounded-lg bg-white text-slate-800 shadow-sm transition-all">
+                                1. Clasificación
+                            </button>
+                            <button onclick="setAngleSubTab('medicion')" id="subtab-medicion" class="flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition-all">
+                                2. Medición
+                            </button>
+                            <button onclick="setAngleSubTab('bisectriz')" id="subtab-bisectriz" class="flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition-all">
+                                3. Bisectriz
+                            </button>
+                        </div>
+
+                        <!-- PANEL 1: CLASIFICACIÓN -->
+                        <div id="panel-clasifica" class="space-y-4">
+                            <h3 class="text-xl font-extrabold text-slate-900">¿Qué tipo de ángulo es?</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Observá la amplitud pintada en el transportador e identificá su clasificación correcta según el Cuadro 1.1 del PDF de estudio.
+                            </p>
+                            <div class="bg-indigo-50 border border-indigo-100 p-4 rounded-xl text-center">
+                                <span class="text-xs font-bold text-indigo-500 uppercase tracking-wider block">Ángulo a clasificar</span>
+                                <span id="clasifica-angle-val" class="text-3xl font-extrabold text-indigo-900 mt-1 block">45°</span>
+                            </div>
+
+                            <!-- Botones de Clasificación sin referencias explícitas entre paréntesis -->
+                            <div class="grid grid-cols-2 gap-2 pt-2">
+                                <button onclick="checkClasificacion('Nulo')" class="py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl transition-all">Ángulo Nulo</button>
+                                <button onclick="checkClasificacion('Agudo')" class="py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl transition-all">Ángulo Agudo</button>
+                                <button onclick="checkClasificacion('Recto')" class="py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl transition-all">Ángulo Recto</button>
+                                <button onclick="checkClasificacion('Obtuso')" class="py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl transition-all">Ángulo Obtuso</button>
+                                <button onclick="checkClasificacion('Llano')" class="py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl transition-all">Ángulo Llano</button>
+                                <button onclick="checkClasificacion('Completo')" class="py-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 rounded-xl transition-all">Ángulo de un Giro</button>
+                            </div>
+                            <div id="clasifica-feedback" class="text-center text-xs font-bold mt-4 min-h-[20px]"></div>
+                        </div>
+
+                        <!-- PANEL 2: MEDICIÓN -->
+                        <div id="panel-medicion" class="hidden space-y-4">
+                            <h3 class="text-xl font-extrabold text-slate-900">Medí el ángulo oculto</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Arrastrá la aguja naranja para alinearla con precisión con el límite del ángulo sombreado de azul en el transportador. Una vez alineado, presioná Validar.
+                            </p>
+                            <div class="bg-amber-50 border border-amber-100 p-4 rounded-xl flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider block">Tu medición actual</span>
+                                    <span id="medicion-current" class="text-2xl font-extrabold text-amber-900 font-mono">0.00°</span>
+                                </div>
+                                <button onclick="validarDesafioMedicion()" class="px-4 py-2.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold rounded-xl shadow transition-all">
+                                    Validar Medida
+                                </button>
+                            </div>
+                            <div id="medicion-feedback" class="text-center text-xs font-bold mt-4 min-h-[20px]"></div>
+                        </div>
+
+                        <!-- PANEL 3: BISECTRIZ -->
+                        <div id="panel-bisectriz" class="hidden space-y-4">
+                            <h3 class="text-xl font-extrabold text-slate-900">Encontrá la Bisectriz</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Ingresá un ángulo decimal personalizado (ej. <strong>28.46°</strong>), el sistema generará el ángulo sombreado y deberás colocar la aguja naranja en la mitad exacta (<strong>14.23°</strong>).
+                            </p>
+
+                            <!-- Entrada del ángulo a dividir (Habilitado para cualquier valor decimal) -->
+                            <div class="flex gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                                <div class="flex-grow">
+                                    <label class="block text-[10px] font-extrabold text-slate-500 uppercase">Ángulo Base (°)</label>
+                                    <input type="number" id="input-angulo-base" value="28.46" step="any" min="10" max="180" class="w-full bg-transparent text-sm font-extrabold text-slate-800 focus:outline-none">
+                                </div>
+                                <button onclick="setCustomAngleBase()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 rounded-lg transition-all shadow-sm">
+                                    Establecer
+                                </button>
+                            </div>
+
+                            <!-- Información y feedback de Bisectriz -->
+                            <div class="bg-cyan-50 border border-cyan-100 p-4 rounded-xl flex items-center justify-between">
+                                <div>
+                                    <span class="text-[10px] font-bold text-cyan-700 uppercase tracking-wider block">Bisectriz Teórica (Mitad)</span>
+                                    <span id="bisectriz-target" class="text-xl font-extrabold text-cyan-900 font-mono">14.23°</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-[10px] font-bold text-slate-500 uppercase block">Posición Aguja</span>
+                                    <span id="bisectriz-current" class="text-xl font-extrabold text-amber-600 font-mono">0.00°</span>
+                                </div>
+                            </div>
+
+                            <!-- Controles de Micro-Ajuste Decimal de 0.01° para Exactitud Absoluta -->
+                            <div class="flex gap-2 justify-center pt-2">
+                                <button onclick="adjustAngle(-0.1)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-extrabold text-slate-700 transition-all">-0.1°</button>
+                                <button onclick="adjustAngle(-0.01)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-extrabold text-slate-700 transition-all">-0.01°</button>
+                                <button onclick="adjustAngle(0.01)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-extrabold text-slate-700 transition-all">+0.01°</button>
+                                <button onclick="adjustAngle(0.1)" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg text-xs font-extrabold text-slate-700 transition-all">+0.1°</button>
+                            </div>
+
+                            <button onclick="validarDesafioBisectriz()" class="w-full py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl text-sm transition-all shadow">
+                                Validar Bisectriz Exacta
+                            </button>
+                            <div id="bisectriz-feedback" class="text-center text-xs font-bold mt-2 min-h-[20px]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Botón Generar Ángulo al azar para agilizar el simulador -->
+                    <button onclick="generateRandomAngle()" class="mt-6 w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-shuffle"></i>
+                        Cambiar Ángulo al Azar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Transportador Interactivo SVG -->
+            <div class="lg:col-span-7 flex flex-col justify-between h-full bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4">
+                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Transportador Interactivo (Arrastrá el mango naranja)</span>
+                    <div class="text-xs font-semibold text-slate-700 bg-slate-100 px-3 py-1.5 rounded-lg flex items-center gap-2 self-stretch sm:self-auto justify-between">
+                        Amplitud Aguja: <span id="protractor-angle-label" class="font-extrabold text-amber-600 font-mono">0.00°</span>
+                    </div>
+                </div>
+
+                <!-- Contenedor del Transportador SVG -->
+                <div class="relative w-full max-w-[480px] mx-auto aspect-[5/3] bg-slate-50 rounded-xl border border-slate-200 overflow-hidden shadow-inner flex items-end justify-center pb-2">
+                    <svg id="angles-svg" viewBox="0 0 500 300" class="w-full h-full">
+                        <!-- Los elementos dinámicos se renderizan por JavaScript -->
+                    </svg>
+                </div>
+
+                <div class="mt-4 bg-slate-50 rounded-xl p-3 border border-slate-100 text-[11px] text-slate-500 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-blue-500"></i>
+                    <span>Podés usar el mouse o tu dedo en pantallas táctiles para arrastrar la aguja naranja con libertad.</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Institucional -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Universidad Tecnológica Nacional - Instituto Nacional Superior del Profesorado Técnico (UTN-INSPT).</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:text-white transition-colors">Seminario Nivelatorio de Matemática</a>
+                <span>|</span>
+                <span class="text-cyan-400 font-semibold font-mono">Unidad 1: Geometría</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de Lógica y Comportamiento -->
+    <script>
+        // --- ESTADO GLOBAL DE LA APLICACIÓN ---
+        const state = {
+            activeTab: 'tab-pista',
+            angleSubTab: 'clasifica',
+            unitProgress: 0,
+            progressFlags: {
+                pistaCompleta: false,
+                clasificacionCompleta: false,
+                medicionCompleta: false,
+                bisectrizCompleta: false
+            },
+            // Datos Desafío 1: Pista de Atletismo
+            pista: {
+                step: 1, // 1: Vértices, 2: Centros, 3: Arcos compás
+                puntosColocados: [], // R1, R2, R3, R4
+                puntosMediosColocados: [], // M1, M2
+                arcosTrazados: {
+                    izquierdo: false,
+                    derecho: false
+                },
+                targetsVertices: [
+                    { id: 'R1', x: 1.0, y: 1.5, label: 'R1' },
+                    { id: 'R2', x: 3.0, y: 1.5, label: 'R2' },
+                    { id: 'R3', x: 3.0, y: 2.5, label: 'R3' },
+                    { id: 'R4', x: 1.0, y: 2.5, label: 'R4' }
+                ],
+                targetsMedios: [
+                    { id: 'M1', x: 1.0, y: 2.0, label: 'M1 (Centro Izq)' },
+                    { id: 'M2', x: 3.0, y: 2.0, label: 'M2 (Centro Der)' }
+                ]
+            },
+            // Datos Desafío 2: Simulador de Ángulos
+            angulos: {
+                currentMode: 'clasifica', // 'clasifica', 'medicion', 'bisectriz'
+                angleTarget: 45.0, // Ángulo objetivo de la fase activa
+                needleAngle: 0.0, // Ángulo actual de la aguja interactiva del transportador
+                lastCalculatedAngle: 0.0,
+                customAngleBase: 28.46
+            }
+        };
+
+        // --- EXPOSICIÓN DE adjustAngle EN EL ÁMBITO GLOBAL (Evita el ReferenceError) ---
+        window.adjustAngle = function(delta) {
+            playSound('click');
+            let nuevoAngulo = state.angulos.needleAngle + delta;
+            // Limitar entre 0° y 180°
+            nuevoAngulo = Math.max(0, Math.min(180, nuevoAngulo));
+            // Redondear a dos decimales de precisión para evitar imprecisiones de coma flotante
+            state.angulos.needleAngle = Math.round(nuevoAngulo * 100) / 100;
+            
+            // Actualizar visualización
+            updateProtractorVisualization();
+        };
+
+        // --- SISTEMA DE AUDIO (Tone.js) ---
+        let synth = null;
+        function playSound(type) {
+            try {
+                if (!synth) {
+                    synth = new Tone.Synth().toDestination();
+                }
+                if (Tone.context.state !== 'running') {
+                    Tone.context.resume();
+                }
+                if (type === 'success') {
+                    synth.triggerAttackRelease("C4", "16n", Tone.now());
+                    synth.triggerAttackRelease("E4", "16n", Tone.now() + 0.12);
+                    synth.triggerAttackRelease("G4", "16n", Tone.now() + 0.24);
+                    synth.triggerAttackRelease("C5", "8n", Tone.now() + 0.36);
+                } else if (type === 'click') {
+                    synth.triggerAttackRelease("E5", "32n");
+                } else if (type === 'error') {
+                    synth.triggerAttackRelease("G2", "6n");
+                }
+            } catch (e) {
+                console.log("Audio not supported yet / interaction needed.");
+            }
+        }
+
+        // --- NAVEGACIÓN Y TABS ---
+        function switchTab(tabId) {
+            playSound('click');
+            state.activeTab = tabId;
+            document.getElementById('tab-pista').classList.add('hidden');
+            document.getElementById('tab-angulos').classList.add('hidden');
+            document.getElementById('btn-tab-pista').className = "px-5 py-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 transition-all whitespace-nowrap";
+            document.getElementById('btn-tab-angulos').className = "px-5 py-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 transition-all whitespace-nowrap";
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById('btn-' + tabId).className = "px-5 py-4 text-sm font-bold border-b-2 border-blue-600 text-blue-600 flex items-center gap-2 transition-all whitespace-nowrap";
+
+            if (tabId === 'tab-angulos') {
+                updateProtractorVisualization();
+            }
+        }
+
+        // --- CONTROL DE PROGRESO GLOBAL ---
+        function updateProgress() {
+            let completedCount = 0;
+            if (state.progressFlags.pistaCompleta) completedCount++;
+            if (state.progressFlags.clasificacionCompleta) completedCount++;
+            if (state.progressFlags.medicionCompleta) completedCount++;
+            if (state.progressFlags.bisectrizCompleta) completedCount++;
+
+            state.unitProgress = completedCount * 25;
+            document.getElementById('unit-progress').style.width = state.unitProgress + "%";
+            document.getElementById('unit-progress-text').innerText = state.unitProgress + "%";
+        }
+
+        // --- DESAFÍO 1: LÓGICA DE LA PISTA DE ATLETISMO (Corrección Responsiva de Coordenadas) ---
+        const mathToSvg = (x, y) => {
+            // x de 0 a 4 se mapea a SVG pixels de 50 a 350
+            // y de 0 a 4 se mapea a SVG pixels de 350 a 50 (eje y invertido en SVG)
+            const xSvg = 50 + x * 75;
+            const ySvg = 350 - y * 75;
+            return { x: xSvg, y: ySvg };
+        };
+
+        const svgToMath = (xSvg, ySvg) => {
+            const x = (xSvg - 50) / 75;
+            const y = (350 - ySvg) / 75;
+            return { x, y };
+        };
+
+        function drawPistaGrid() {
+            const svg = document.getElementById('pista-svg');
+            svg.innerHTML = ''; // Limpiar lienzo
+
+            // Dibujar fondo de cuadrícula
+            const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+            defs.innerHTML = `
+                <pattern id="pista-grid" width="37.5" height="37.5" patternUnits="userSpaceOnUse">
+                    <path d="M 37.5 0 L 0 0 0 37.5" fill="none" stroke="rgba(226, 232, 240, 0.8)" stroke-width="1"/>
+                </pattern>
+            `;
+            svg.appendChild(defs);
+
+            const gridRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            gridRect.setAttribute("width", "400");
+            gridRect.setAttribute("height", "400");
+            gridRect.setAttribute("fill", "url(#pista-grid)");
+            svg.appendChild(gridRect);
+
+            // Dibujar Ejes principales x/y
+            const xAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            xAxis.setAttribute("x1", "20"); xAxis.setAttribute("y1", "350");
+            xAxis.setAttribute("x2", "380"); xAxis.setAttribute("y2", "350");
+            xAxis.setAttribute("stroke", "#475569"); xAxis.setAttribute("stroke-width", "2");
+            svg.appendChild(xAxis);
+
+            const yAxis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            yAxis.setAttribute("x1", "50"); yAxis.setAttribute("y1", "20");
+            yAxis.setAttribute("x2", "50"); yAxis.setAttribute("y2", "380");
+            yAxis.setAttribute("stroke", "#475569"); yAxis.setAttribute("stroke-width", "2");
+            svg.appendChild(yAxis);
+
+            // Dibujar números y subdivisiones en los ejes
+            for (let i = 0; i <= 4; i++) {
+                const pt = mathToSvg(i, i);
+                // Etiquetas eje X
+                const txtX = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                txtX.setAttribute("x", pt.x); txtX.setAttribute("y", "370");
+                txtX.setAttribute("text-anchor", "middle"); txtX.setAttribute("class", "text-[10px] font-bold fill-slate-500");
+                txtX.textContent = i + " m";
+                svg.appendChild(txtX);
+
+                // Etiquetas eje Y
+                const txtY = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                txtY.setAttribute("x", "25"); txtY.setAttribute("y", pt.y + 4);
+                txtY.setAttribute("text-anchor", "end"); txtY.setAttribute("class", "text-[10px] font-bold fill-slate-500");
+                txtY.textContent = i + " m";
+                svg.appendChild(txtY);
+            }
+
+            // --- GUÍAS PULSANTES DE ASISTENCIA PEDAGÓGICA EN TIEMPO REAL ---
+            if (state.pista.step === 1) {
+                // Guías para marcar vértices R1, R2, R3, R4
+                state.pista.targetsVertices.forEach(target => {
+                    const alreadyPlaced = state.pista.puntosColocados.some(p => p.id === target.id);
+                    if (!alreadyPlaced) {
+                        const pos = mathToSvg(target.x, target.y);
+                        const guide = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        guide.setAttribute("cx", pos.x); guide.setAttribute("cy", pos.y);
+                        guide.setAttribute("r", "10");
+                        guide.setAttribute("fill", "rgba(59, 130, 246, 0.15)");
+                        guide.setAttribute("stroke", "#3b82f6"); guide.setAttribute("stroke-width", "1.5");
+                        guide.setAttribute("stroke-dasharray", "3,3");
+                        guide.setAttribute("class", "animate-pulse");
+                        svg.appendChild(guide);
+                    }
+                });
+            } else if (state.pista.step === 2) {
+                // Guías para marcar centros de arco M1, M2
+                state.pista.targetsMedios.forEach(target => {
+                    const alreadyPlaced = state.pista.puntosMediosColocados.some(p => p.id === target.id);
+                    if (!alreadyPlaced) {
+                        const pos = mathToSvg(target.x, target.y);
+                        const guide = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                        guide.setAttribute("cx", pos.x); guide.setAttribute("cy", pos.y);
+                        guide.setAttribute("r", "10");
+                        guide.setAttribute("fill", "rgba(245, 158, 11, 0.15)");
+                        guide.setAttribute("stroke", "#f59e0b"); guide.setAttribute("stroke-width", "1.5");
+                        guide.setAttribute("stroke-dasharray", "3,3");
+                        guide.setAttribute("class", "animate-pulse");
+                        svg.appendChild(guide);
+                    }
+                });
+            } else if (state.pista.step === 3) {
+                // Destacar los centros con círculos pulsantes para apoyar el compás virtual
+                if (!state.pista.arcosTrazados.izquierdo) {
+                    const pos = mathToSvg(1.0, 2.0);
+                    const guide = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    guide.setAttribute("cx", pos.x); guide.setAttribute("cy", pos.y);
+                    guide.setAttribute("r", "14");
+                    guide.setAttribute("fill", "rgba(6, 182, 212, 0.15)");
+                    guide.setAttribute("stroke", "#06b6d4"); guide.setAttribute("stroke-width", "2");
+                    guide.setAttribute("stroke-dasharray", "4,2");
+                    guide.setAttribute("class", "animate-pulse");
+                    svg.appendChild(guide);
+                }
+                if (!state.pista.arcosTrazados.derecho) {
+                    const pos = mathToSvg(3.0, 2.0);
+                    const guide = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                    guide.setAttribute("cx", pos.x); guide.setAttribute("cy", pos.y);
+                    guide.setAttribute("r", "14");
+                    guide.setAttribute("fill", "rgba(6, 182, 212, 0.15)");
+                    guide.setAttribute("stroke", "#06b6d4"); guide.setAttribute("stroke-width", "2");
+                    guide.setAttribute("stroke-dasharray", "4,2");
+                    guide.setAttribute("class", "animate-pulse");
+                    svg.appendChild(guide);
+                }
+            }
+
+            // --- RENDERIZADO DEL ESTADO DE CONSTRUCCIÓN ---
+            // 1. Dibujar los 4 vértices del rectángulo base
+            state.pista.puntosColocados.forEach(pt => {
+                const pos = mathToSvg(pt.x, pt.y);
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", pos.x); circle.setAttribute("cy", pos.y);
+                circle.setAttribute("r", "6"); circle.setAttribute("fill", "#2563eb");
+                circle.setAttribute("stroke", "white"); circle.setAttribute("stroke-width", "2");
+                svg.appendChild(circle);
+
+                const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                txt.setAttribute("x", pos.x - 12); txt.setAttribute("y", pos.y - 10);
+                txt.setAttribute("class", "text-[11px] font-black fill-blue-800");
+                txt.textContent = pt.label;
+                svg.appendChild(txt);
+            });
+
+            // 2. Si están los 4 vértices, dibujar las rectas paralelas superior e inferior (pistas rectas de atletismo)
+            if (state.pista.puntosColocados.length === 4) {
+                const r1 = mathToSvg(1, 1.5);
+                const r2 = mathToSvg(3, 1.5);
+                const r3 = mathToSvg(3, 2.5);
+                const r4 = mathToSvg(1, 2.5);
+
+                // Recta inferior
+                const lineInf = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                lineInf.setAttribute("x1", r1.x); lineInf.setAttribute("y1", r1.y);
+                lineInf.setAttribute("x2", r2.x); lineInf.setAttribute("y2", r2.y);
+                lineInf.setAttribute("stroke", "#1e3a8a"); lineInf.setAttribute("stroke-width", "4");
+                svg.appendChild(lineInf);
+
+                // Recta superior
+                const lineSup = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                lineSup.setAttribute("x1", r4.x); lineSup.setAttribute("y1", r4.y);
+                lineSup.setAttribute("x2", r3.x); lineSup.setAttribute("y2", r3.y);
+                lineSup.setAttribute("stroke", "#1e3a8a"); lineSup.setAttribute("stroke-width", "4");
+                svg.appendChild(lineSup);
+
+                // Dibujar línea discontinua de contención de la cancha central
+                const centerBoundaryL = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                centerBoundaryL.setAttribute("x1", r1.x); centerBoundaryL.setAttribute("y1", r1.y);
+                centerBoundaryL.setAttribute("x2", r4.x); centerBoundaryL.setAttribute("y2", r4.y);
+                centerBoundaryL.setAttribute("stroke", "#cbd5e1"); centerBoundaryL.setAttribute("stroke-dasharray", "4,4");
+                svg.appendChild(centerBoundaryL);
+
+                const centerBoundaryR = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                centerBoundaryR.setAttribute("x1", r2.x); centerBoundaryR.setAttribute("y1", r2.y);
+                centerBoundaryR.setAttribute("x2", r3.x); centerBoundaryR.setAttribute("y2", r3.y);
+                centerBoundaryR.setAttribute("stroke", "#cbd5e1"); centerBoundaryR.setAttribute("stroke-dasharray", "4,4");
+                svg.appendChild(centerBoundaryR);
+            }
+
+            // 3. Dibujar los centros de retorno (Puntos Medios M1, M2)
+            state.pista.puntosMediosColocados.forEach(pt => {
+                const pos = mathToSvg(pt.x, pt.y);
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", pos.x); circle.setAttribute("cy", pos.y);
+                circle.setAttribute("r", "6"); circle.setAttribute("fill", "#f59e0b");
+                circle.setAttribute("stroke", "white"); circle.setAttribute("stroke-width", "2");
+                svg.appendChild(circle);
+
+                const txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                txt.setAttribute("x", pos.x + 10); txt.setAttribute("y", pos.y + 4);
+                txt.setAttribute("class", "text-[11px] font-black fill-amber-700");
+                txt.textContent = pt.label;
+                svg.appendChild(txt);
+            });
+
+            // 4. Dibujar los arcos simétricos semicirculares si ya están trazados
+            if (state.pista.arcosTrazados.izquierdo) {
+                // Arco izquierdo: de R1(1; 1.5) a R4(1; 2.5) pasando por la izquierda (radio 0.5)
+                const start = mathToSvg(1, 1.5);
+                const end = mathToSvg(1, 2.5);
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path.setAttribute("d", `M ${start.x} ${start.y} A 37.5 37.5 0 0 1 ${end.x} ${end.y}`);
+                path.setAttribute("fill", "none"); path.setAttribute("stroke", "#06b6d4");
+                path.setAttribute("stroke-width", "5");
+                svg.appendChild(path);
+            }
+
+            if (state.pista.arcosTrazados.derecho) {
+                // Arco derecho: de R3(3; 2.5) a R2(3; 1.5) pasando por la derecha (radio 0.5)
+                const start = mathToSvg(3, 2.5);
+                const end = mathToSvg(3, 1.5);
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path.setAttribute("d", `M ${start.x} ${start.y} A 37.5 37.5 0 0 1 ${end.x} ${end.y}`);
+                path.setAttribute("fill", "none"); path.setAttribute("stroke", "#06b6d4");
+                path.setAttribute("stroke-width", "5");
+                svg.appendChild(path);
+            }
+
+            // --- ESCUCHADORES DE EVENTOS RESPONSIVOS PARA CLIC Y MOVIMIENTO ---
+            svg.onmousemove = function(e) {
+                const rect = svg.getBoundingClientRect();
+                // Corrección: Escalar píxeles del cliente real al viewBox virtual (400x400)
+                const xSvg = ((e.clientX - rect.left) / rect.width) * 400;
+                const ySvg = ((e.clientY - rect.top) / rect.height) * 400;
+                const mathCoord = svgToMath(xSvg, ySvg);
+
+                // Redondear a la subdivisión más cercana de 0.5
+                const snappedX = Math.round(mathCoord.x * 2) / 2;
+                const snappedY = Math.round(mathCoord.y * 2) / 2;
+
+                if (snappedX >= 0 && snappedX <= 4 && snappedY >= 0 && snappedY <= 4) {
+                    document.getElementById('coord-hover').innerText = `Apuntando a: (${snappedX.toFixed(1)}; ${snappedY.toFixed(1)})`;
+                }
+            };
+
+            svg.onclick = function(e) {
+                const rect = svg.getBoundingClientRect();
+                // Corrección: Escalar píxeles del cliente real al viewBox virtual (400x400)
+                const xSvg = ((e.clientX - rect.left) / rect.width) * 400;
+                const ySvg = ((e.clientY - rect.top) / rect.height) * 400;
+                const mathCoord = svgToMath(xSvg, ySvg);
+
+                // Redondeamos para facilitar el clic exacto del alumno (snapping de 0.5)
+                const clickedX = Math.round(mathCoord.x * 2) / 2;
+                const clickedY = Math.round(mathCoord.y * 2) / 2;
+
+                processPistaClick(clickedX, clickedY);
+            };
+        }
+
+        function processPistaClick(cx, cy) {
+            // FASE 1: Colocar los vértices del rectángulo central
+            if (state.pista.step === 1) {
+                const target = state.pista.targetsVertices.find(v => v.x === cx && v.y === cy);
+                if (target) {
+                    // Evitar duplicados
+                    if (!state.pista.puntosColocados.some(p => p.id === target.id)) {
+                        playSound('click');
+                        state.pista.puntosColocados.push(target);
+                        drawPistaGrid();
+
+                        // Validar si completamos los 4 vértices
+                        if (state.pista.puntosColocados.length === 4) {
+                            state.pista.step = 2;
+                            document.getElementById('step-1').className = "flex items-start gap-3 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl transition-all";
+                            document.getElementById('step-1').querySelector('.step-num').className = "step-num flex-shrink-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mt-0.5";
+                            document.getElementById('step-2').className = "flex items-start gap-3 p-3.5 bg-blue-50 border border-blue-200 rounded-xl transition-all";
+                            document.getElementById('step-2').classList.remove('opacity-60');
+                            drawPistaGrid(); // Redibujar para pintar las nuevas guías pulsantes del Paso 2
+                        }
+                    }
+                } else {
+                    playSound('error');
+                }
+            }
+            // FASE 2: Colocar los centros de retorno (Puntos Medios)
+            else if (state.pista.step === 2) {
+                const target = state.pista.targetsMedios.find(m => m.x === cx && m.y === cy);
+                if (target) {
+                    if (!state.pista.puntosMediosColocados.some(p => p.id === target.id)) {
+                        playSound('click');
+                        state.pista.puntosMediosColocados.push(target);
+                        drawPistaGrid();
+
+                        // Validar si completamos los 2 centros
+                        if (state.pista.puntosMediosColocados.length === 2) {
+                            state.pista.step = 3;
+                            document.getElementById('step-2').className = "flex items-start gap-3 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl transition-all";
+                            document.getElementById('step-2').querySelector('.step-num').className = "step-num flex-shrink-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mt-0.5";
+                            document.getElementById('step-3').className = "flex items-start gap-3 p-3.5 bg-blue-50 border border-blue-200 rounded-xl transition-all";
+                            document.getElementById('step-3').classList.remove('opacity-60');
+                            drawPistaGrid(); // Redibujar para mostrar las nuevas guías del Paso 3
+                        }
+                    }
+                } else {
+                    playSound('error');
+                }
+            }
+            // FASE 3: Simular el barrido del compás sobre los centros
+            else if (state.pista.step === 3) {
+                // Si hace clic sobre el centro M1, traza el arco izquierdo
+                if (cx === 1.0 && cy === 2.0) {
+                    playSound('success');
+                    state.pista.arcosTrazados.izquierdo = true;
+                }
+                // Si hace clic sobre el centro M2, traza el arco derecho
+                if (cx === 3.0 && cy === 2.0) {
+                    playSound('success');
+                    state.pista.arcosTrazados.derecho = true;
+                }
+                drawPistaGrid();
+
+                // Validar la finalización total de la construcción del óvalo deportivo
+                if (state.pista.arcosTrazados.izquierdo && state.pista.arcosTrazados.derecho) {
+                    playSound('success');
+                    state.progressFlags.pistaCompleta = true;
+                    updateProgress();
+
+                    document.getElementById('step-3').className = "flex items-start gap-3 p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl transition-all";
+                    document.getElementById('step-3').querySelector('.step-num').className = "step-num flex-shrink-0 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold mt-0.5";
+
+                    // Mostramos la tarjeta de éxito debajo del lienzo de forma limpia y despejada
+                    document.getElementById('pista-success-container').classList.remove('hidden');
+                }
+            }
+        }
+
+        function resetDesafioPista() {
+            playSound('click');
+            state.pista.step = 1;
+            state.pista.puntosColocados = [];
+            state.pista.puntosMediosColocados = [];
+            state.pista.arcosTrazados.izquierdo = false;
+            state.pista.arcosTrazados.derecho = false;
+            state.progressFlags.pistaCompleta = false;
+            updateProgress();
+
+            document.getElementById('pista-success-container').classList.add('hidden');
+            document.getElementById('step-1').className = "flex items-start gap-3 p-3.5 bg-blue-50 border border-blue-200 rounded-xl transition-all";
+            document.getElementById('step-1').querySelector('.step-num').className = "step-num flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold mt-0.5";
+            
+            document.getElementById('step-2').className = "flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-100 rounded-xl transition-all opacity-60";
+            document.getElementById('step-2').querySelector('.step-num').className = "step-num flex-shrink-0 w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold mt-0.5";
+
+            document.getElementById('step-3').className = "flex items-start gap-3 p-3.5 bg-slate-50 border border-slate-100 rounded-xl transition-all opacity-60";
+            document.getElementById('step-3').querySelector('.step-num').className = "step-num flex-shrink-0 w-6 h-6 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-xs font-bold mt-0.5";
+
+            drawPistaGrid();
+        }
+
+        // --- DESAFÍO 2: LÓGICA DEL SIMULADOR DE ÁNGULOS Y BISECTRICES ---
+        function setAngleSubTab(subMode) {
+            playSound('click');
+            state.angleSubTab = subMode;
+
+            // Ocultar todos los subpaneles
+            document.getElementById('panel-clasifica').classList.add('hidden');
+            document.getElementById('panel-medicion').classList.add('hidden');
+            document.getElementById('panel-bisectriz').classList.add('hidden');
+
+            document.getElementById('subtab-clasifica').className = "flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition-all";
+            document.getElementById('subtab-medicion').className = "flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition-all";
+            document.getElementById('subtab-bisectriz').className = "flex-1 py-2 text-xs font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition-all";
+
+            // Mostrar el seleccionado
+            document.getElementById('panel-' + subMode).classList.remove('hidden');
+            document.getElementById('subtab-' + subMode).className = "flex-1 py-2 text-xs font-extrabold rounded-lg bg-white text-slate-800 shadow-sm transition-all";
+
+            // Limpiar cajas de feedback
+            document.getElementById('clasifica-feedback').innerText = "";
+            document.getElementById('medicion-feedback').innerText = "";
+            document.getElementById('bisectriz-feedback').innerText = "";
+
+            generateRandomAngle();
+        }
+
+        function generateRandomAngle() {
+            if (state.angleSubTab === 'clasifica') {
+                // Clasificación de ángulos según categorías lógicas
+                const angles = [0, 30, 45, 90, 120, 150, 180, 360];
+                const r = angles[Math.floor(Math.random() * angles.length)];
+                state.angulos.angleTarget = r;
+                state.angulos.needleAngle = r; // Sincronizado para mostrar el ángulo correcto
+                document.getElementById('clasifica-angle-val').innerText = r + "°";
+            } else if (state.angleSubTab === 'medicion') {
+                // Generar un ángulo secreto entero que deba medirse
+                const target = Math.floor(Math.random() * 16) * 10 + 15; // De 15 a 165
+                state.angulos.angleTarget = target;
+                state.angulos.needleAngle = 0.0; // Iniciar transportador en cero
+            } else if (state.angleSubTab === 'bisectriz') {
+                // Cargar valor de bisectriz actual por defecto
+                const base = parseFloat(document.getElementById('input-angulo-base').value) || 28.46;
+                state.angulos.angleTarget = base;
+                state.angulos.needleAngle = 0.0; // Comenzar transportador en cero
+                document.getElementById('bisectriz-target').innerText = (base / 2).toFixed(2) + "°";
+            }
+
+            updateProtractorVisualization();
+        }
+
+        function setCustomAngleBase() {
+            playSound('click');
+            let base = parseFloat(document.getElementById('input-angulo-base').value);
+            if (isNaN(base) || base < 10 || base > 180) {
+                playSound('error');
+                document.getElementById('bisectriz-feedback').innerHTML = "<span class='text-red-500'>Por favor, ingresá un ángulo válido entre 10° y 180°</span>";
+                return;
+            }
+
+            // Aplicar redondeo a centésimas
+            base = Math.round(base * 100) / 100;
+            state.angulos.angleTarget = base;
+            state.angulos.customAngleBase = base;
+            state.angulos.needleAngle = 0.0; // Resetear aguja del transportador
+
+            document.getElementById('bisectriz-target').innerText = (base / 2).toFixed(2) + "°";
+            document.getElementById('bisectriz-feedback').innerText = "";
+
+            updateProtractorVisualization();
+        }
+
+        // DIBUJAR TRANSPORTADOR E INTERACCIÓN VECTORIAL
+        function updateProtractorVisualization() {
+            const svg = document.getElementById('angles-svg');
+            svg.innerHTML = ''; // Limpiar lienzo
+
+            // Dibujar cuerpo exterior del semicírculo del transportador
+            const body = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            body.setAttribute("d", "M 50 250 A 200 200 0 0 1 450 250 Z");
+            body.setAttribute("fill", "#f8fafc"); body.setAttribute("stroke", "#cbd5e1");
+            body.setAttribute("stroke-width", "4");
+            svg.appendChild(body);
+
+            // Dibujar escala graduada en intervalos de 10 grados
+            for (let deg = 0; deg <= 180; deg += 10) {
+                const rad = (deg * Math.PI) / 180;
+                // Coordenadas exterior e interior para la muesca de grado
+                const x1 = 250 + 200 * Math.cos(rad);
+                const y1 = 250 - 200 * Math.sin(rad);
+                const x2 = 250 + 188 * Math.cos(rad);
+                const y2 = 250 - 188 * Math.sin(rad);
+
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+                line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+                line.setAttribute("stroke", "#64748b"); line.setAttribute("stroke-width", "2");
+                svg.appendChild(line);
+
+                // Imprimir textos numéricos a la mitad de la escala
+                if (deg % 30 === 0) {
+                    const tx = 250 + 172 * Math.cos(rad);
+                    const ty = 250 - 172 * Math.sin(rad);
+                    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    label.setAttribute("x", tx); label.setAttribute("y", ty + 4);
+                    label.setAttribute("text-anchor", "middle"); label.setAttribute("class", "text-[9px] font-bold fill-slate-400");
+                    label.textContent = (180 - deg) + "°"; // Escala estándar de izquierda a derecha
+                    svg.appendChild(label);
+                }
+            }
+
+            // Dibujar el ángulo objetivo sombreado de azul
+            if (state.angulos.angleTarget > 0) {
+                const limitRad = (state.angulos.angleTarget * Math.PI) / 180;
+                const tx = 250 + 180 * Math.cos(limitRad);
+                const ty = 250 - 180 * Math.sin(limitRad);
+
+                const wedge = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                // M 250 250 L 430 250 A 180 180 0 {largeArc} 0 {tx} {ty} Z
+                const largeArc = state.angulos.angleTarget > 180 ? 1 : 0;
+                wedge.setAttribute("d", `M 250 250 L 430 250 A 180 180 0 ${largeArc} 0 ${tx} ${ty} Z`);
+                wedge.setAttribute("fill", "rgba(59, 130, 246, 0.15)"); wedge.setAttribute("stroke", "#3b82f6");
+                wedge.setAttribute("stroke-width", "3");
+                svg.appendChild(wedge);
+            }
+
+            // Dibujar la aguja interactiva del transportador (Línea Naranja)
+            const needleRad = (state.angulos.needleAngle * Math.PI) / 180;
+            const nx = 250 + 195 * Math.cos(needleRad);
+            const ny = 250 - 195 * Math.sin(needleRad);
+
+            const needle = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            needle.setAttribute("x1", "250"); needle.setAttribute("y1", "250");
+            needle.setAttribute("x2", nx); needle.setAttribute("y2", ny);
+            needle.setAttribute("stroke", "#f59e0b"); needle.setAttribute("stroke-width", "4");
+            svg.appendChild(needle);
+
+            // Dibujar mango de arrastre al extremo de la aguja
+            const handle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            handle.setAttribute("cx", nx); handle.setAttribute("cy", ny);
+            handle.setAttribute("r", "10"); handle.setAttribute("fill", "#f59e0b");
+            handle.setAttribute("stroke", "white"); handle.setAttribute("stroke-width", "3");
+            handle.setAttribute("class", "cursor-grab active:cursor-grabbing shadow");
+            svg.appendChild(handle);
+
+            // Centro del transportador (Eje O)
+            const origin = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            origin.setAttribute("cx", "250"); origin.setAttribute("cy", "250");
+            origin.setAttribute("r", "8"); origin.setAttribute("fill", "#1e293b");
+            svg.appendChild(origin);
+
+            // Sincronizar etiquetas de texto de la interfaz
+            document.getElementById('protractor-angle-label').innerText = state.angulos.needleAngle.toFixed(2) + "°";
+            if (state.angleSubTab === 'medicion') {
+                document.getElementById('medicion-current').innerText = state.angulos.needleAngle.toFixed(2) + "°";
+            } else if (state.angleSubTab === 'bisectriz') {
+                document.getElementById('bisectriz-current').innerText = state.angulos.needleAngle.toFixed(2) + "°";
+            }
+
+            // --- ESCUCHADORES DE ARRASTRE TÁCTIL / MOUSE ---
+            let isDragging = false;
+            const updateAngleFromEvent = (e) => {
+                const rect = svg.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                const xSvg = ((clientX - rect.left) / rect.width) * 500;
+                const ySvg = ((clientY - rect.top) / rect.height) * 300;
+
+                const dx = xSvg - 250;
+                const dy = 250 - ySvg; // Inversión del eje Y en SVG
+
+                let angleRad = Math.atan2(dy, dx);
+                let angleDeg = (angleRad * 180) / Math.PI;
+
+                if (angleDeg < 0) {
+                    // Limitar extremos lógicos
+                    angleDeg = dx > 0 ? 0 : 180;
+                }
+
+                // Guardar posición con precisión exacta de centésimas de grado (0.01°)
+                state.angulos.needleAngle = Math.round(angleDeg * 100) / 100;
+                updateProtractorVisualization();
+            };
+
+            const onStart = (e) => {
+                isDragging = true;
+                updateAngleFromEvent(e);
+            };
+
+            const onMove = (e) => {
+                if (isDragging) {
+                    updateAngleFromEvent(e);
+                }
+            };
+
+            const onEnd = () => {
+                isDragging = false;
+            };
+
+            // Eventos Mouse
+            handle.addEventListener('mousedown', onStart);
+            svg.addEventListener('mousemove', onMove);
+            window.addEventListener('mouseup', onEnd);
+
+            // Eventos Táctiles (Mobile-friendly)
+            handle.addEventListener('touchstart', onStart, { passive: true });
+            svg.addEventListener('touchmove', onMove, { passive: true });
+            window.addEventListener('touchend', onEnd);
+        }
+
+        // --- VALIDACIONES DE LAS ACTIVIDADES DE ÁNGULOS ---
+        // 1. Validar Clasificación
+        function checkClasificacion(respuestaUsuario) {
+            let clasificacionCorrecta = "";
+            const deg = state.angulos.angleTarget;
+
+            if (deg === 0) clasificacionCorrecta = "Nulo";
+            else if (deg > 0 && deg < 90) clasificacionCorrecta = "Agudo";
+            else if (deg === 90) clasificacionCorrecta = "Recto";
+            else if (deg > 90 && deg < 180) clasificacionCorrecta = "Obtuso";
+            else if (deg === 180) clasificacionCorrecta = "Llano";
+            else if (deg === 360) clasificacionCorrecta = "Completo";
+
+            const feedback = document.getElementById('clasifica-feedback');
+            if (respuestaUsuario === clasificacionCorrecta) {
+                playSound('success');
+                feedback.className = "text-center text-xs font-bold mt-4 text-emerald-600";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Excelente! Un ángulo de ${deg}° se clasifica como ${respuestaUsuario}.`;
+
+                if (!state.progressFlags.clasificacionCompleta) {
+                    state.progressFlags.clasificacionCompleta = true;
+                    updateProgress();
+                }
+            } else {
+                playSound('error');
+                feedback.className = "text-center text-xs font-bold mt-4 text-red-500";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Incorrecto. El ángulo de ${deg}° no es un ángulo ${respuestaUsuario}. Intentá otra vez.`;
+            }
+        }
+
+        // 2. Validar Medición de Ángulo Secreto
+        function validarDesafioMedicion() {
+            const real = state.angulos.angleTarget;
+            const usuario = state.angulos.needleAngle;
+            const dif = Math.abs(usuario - real);
+
+            const feedback = document.getElementById('medicion-feedback');
+            if (dif < 1.5) { // Tolerancia flexible para medición manual analógica
+                playSound('success');
+                feedback.className = "text-center text-xs font-bold mt-4 text-emerald-600";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Perfecto! El ángulo real es de ${real}°. Tu medición fue de ${usuario}° (Margen de error de ${dif.toFixed(2)}°).`;
+
+                if (!state.progressFlags.medicionCompleta) {
+                    state.progressFlags.medicionCompleta = true;
+                    updateProgress();
+                }
+            } else {
+                playSound('error');
+                feedback.className = "text-center text-xs font-bold mt-4 text-red-500";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Medición desfasada. La aguja se encuentra en ${usuario}°. ¡Ajustala con más cuidado!`;
+            }
+        }
+
+        // 3. Validar Bisectriz Exacta (Alta Precisión a Centésimas de Grado)
+        function validarDesafioBisectriz() {
+            const total = state.angulos.angleTarget;
+            const bisectrizTeorica = Math.round((total / 2) * 100) / 100;
+            const usuario = state.angulos.needleAngle;
+            const dif = Math.abs(usuario - bisectrizTeorica);
+
+            const feedback = document.getElementById('bisectriz-feedback');
+
+            // Exigimos precisión absoluta de centésimas de grado (tolerancia menor a 0.05°)
+            if (dif < 0.05) {
+                playSound('success');
+                feedback.className = "text-center text-xs font-bold mt-2 text-emerald-600";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> ¡Matemáticamente perfecto! Ubicaste la bisectriz exacta en ${usuario}° para un ángulo de ${total}°.`;
+
+                if (!state.progressFlags.bisectrizCompleta) {
+                    state.progressFlags.bisectrizCompleta = true;
+                    updateProgress();
+                }
+            } else {
+                playSound('error');
+                feedback.className = "text-center text-xs font-bold mt-2 text-red-500";
+                feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Error por ${dif.toFixed(2)}°. Para ${total}°, la bisectriz exacta está a ${bisectrizTeorica}°. Tu aguja está en ${usuario}°.`;
+            }
+        }
+
+        // --- ARRANQUE DE LA APLICACIÓN AL CARGAR LA PÁGINA ---
+        window.onload = function() {
+            drawPistaGrid();
+            updateProtractorVisualization();
+            updateProgress();
+        };
+    </script>
+</body>
+</html>
