@@ -1,4 +1,4 @@
-# Prueba01
+# Prueba 01
 Este es mi primer repositorio
 
 # Mis Recursos Académicos
