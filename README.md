@@ -1,4 +1,4 @@
-# Prueba 02
+
 Este es mi segundo repositorio.
 
 Aquí quiero subir los ejercicios para el cuadernillo.
