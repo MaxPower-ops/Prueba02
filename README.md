@@ -1,14 +1,12 @@
 
 Este es mi segundo repositorio.
 
-Aquí quiero subir los ejercicios para el cuadernillo.
+Aquí quiero subir los ejercicios para el cuadernillo virtual realizado por los estudiantes de compu 2026.
 
-# Mis Recursos Académicos
+# Nuestros Recursos Académicos
 
-Bienvenido. Aquí puedes encontrar los archivos disponibles para su consulta y descarga:
+Bienvenido. Aquí encontrarás todas nuestras actividades propuestas:
 
-### 📊 Reportes e Informes
+### 🎯 De Ana: 
 
-### 🎯 Bases de datos
 
-### 📄 Documentos PDF
