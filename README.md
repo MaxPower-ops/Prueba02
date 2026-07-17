@@ -1,5 +1,7 @@
-# Prueba 01
-Este es mi primer repositorio
+# Prueba 02
+Este es mi segundo repositorio.
+
+Aquí quiero subir los ejercicios para el cuadernillo.
 
 # Mis Recursos Académicos
 
