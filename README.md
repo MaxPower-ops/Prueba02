@@ -7,6 +7,6 @@ Aquí quiero subir los ejercicios para el cuadernillo virtual realizado por los 
 
 Bienvenido. Aquí encontrarás todas nuestras actividades propuestas:
 
-### 🎯 De Ana: 
+### 🎯 De Ana: [Ver Reporte: Propuesta 01](Propuesta01.html)
 
 
